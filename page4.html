@@ -1,0 +1,130 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GPA calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    p.subtitle {
+      margin-bottom: 40px;
+      font-size: 1.2em;
+      color: #777;
+    }
+    h2 {
+      margin-bottom: 30px;
+      color: #333;
+    }
+    .input-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .input-container input {
+      width: 100px;
+      padding: 10px;
+      font-size: 1em;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      margin-bottom: 30px;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.5em;
+    }
+    .back-button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>GPA calculator</h1>
+  <p class="subtitle">
+    Until now! There are two known ways to calculate your GPA, I'm not sure which one is the official one, so until our college gives us more information you can use these two ways to calculate your GPA.
+  </p>
+  
+  <!-- Student Guideline Way Section -->
+  <h2>Student Guideline Way</h2>
+  <div class="input-container">
+    <input type="number" id="year1" placeholder="First Year">
+    <input type="number" id="year2" placeholder="Second Year">
+    <input type="number" id="year3" placeholder="Third Year">
+    <input type="number" id="year4" placeholder="Fourth Year">
+    <input type="number" id="year5" placeholder="Fifth Year">
+  </div>
+  <button onclick="calculateGPA()">Calculate</button>
+  <div class="result" id="resultDisplay"></div>
+  
+  <!-- Alternative Way Section -->
+  <h2>Alternative Way</h2>
+  <div class="input-container">
+    <input type="number" id="altYear1" placeholder="First Year">
+    <input type="number" id="altYear2" placeholder="Second Year">
+    <input type="number" id="altYear3" placeholder="Third Year">
+    <input type="number" id="altYear4" placeholder="Fourth Year">
+    <input type="number" id="altYear5" placeholder="Fifth Year">
+  </div>
+  <button onclick="calculateAlternative()">Calculate</button>
+  <div class="result" id="alternativeResultDisplay"></div>
+  
+  <!-- Back Button -->
+  <button class="back-button" onclick="window.location.href='page2.html'">Back</button>
+  
+  <script>
+    function calculateGPA() {
+      // Retrieve values; default to 0 if empty
+      const year1 = parseFloat(document.getElementById('year1').value) || 0;
+      const year2 = parseFloat(document.getElementById('year2').value) || 0;
+      const year3 = parseFloat(document.getElementById('year3').value) || 0;
+      const year4 = parseFloat(document.getElementById('year4').value) || 0;
+      const year5 = parseFloat(document.getElementById('year5').value) || 0;
+      
+      // Calculation based on the given weights:
+      // First Year * 0.10, Second Year * 0.15, Third Year * 0.20,
+      // Fourth Year * 0.25, Fifth Year * 0.30
+      const sum = (year1 * 0.10) + (year2 * 0.15) + (year3 * 0.20) + (year4 * 0.25) + (year5 * 0.30);
+      
+      // Display the result, formatted to two decimals
+      document.getElementById('resultDisplay').innerText = "Result: " + sum.toFixed(2);
+    }
+    
+    function calculateAlternative() {
+      // Retrieve values for the alternative calculation; default to 0 if empty
+      const alt1 = parseFloat(document.getElementById('altYear1').value) || 0;
+      const alt2 = parseFloat(document.getElementById('altYear2').value) || 0;
+      const alt3 = parseFloat(document.getElementById('altYear3').value) || 0;
+      const alt4 = parseFloat(document.getElementById('altYear4').value) || 0;
+      const alt5 = parseFloat(document.getElementById('altYear5').value) || 0;
+      
+      // Sum the inputs of the first 3 boxes, divide by 3, then multiply by 0.25.
+      const sumFirstThree = alt1 + alt2 + alt3;
+      const result1 = (sumFirstThree / 3) * 0.25;
+      
+      // Multiply the fourth box by 0.35 and the fifth box by 0.40.
+      const result2 = alt4 * 0.35;
+      const result3 = alt5 * 0.40;
+      
+      // Sum the results of these multiplications and add to result1.
+      const finalAlternative = result1 + result2 + result3;
+      
+      // Display the final alternative result, formatted to two decimals.
+      document.getElementById('alternativeResultDisplay').innerText = "Alternative GPA: " + finalAlternative.toFixed(2);
+    }
+  </script>
+</body>
+</html>
